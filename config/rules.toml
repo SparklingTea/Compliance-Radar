@@ -1,0 +1,71 @@
+# Compliance Radar rule configuration.
+# Periods, thresholds and legal references live here so a rule can be changed
+# (e.g. when the 2030 standard moves to the Home Energy Model metric) without code edits.
+# Law as checked against legislation.gov.uk on 2026-09-29. Not legal advice.
+
+[epc_validity]
+id = "EPC-VALID"
+name = "Valid EPC for letting"
+law = "Energy Performance of Buildings (England and Wales) Regulations 2012 (SI 2012/3118), reg 6(2) and 6(5); validity in reg 9(2)(a)"
+rule = "A valid EPC must be given to a prospective tenant and to the person who becomes tenant. An EPC is valid only if entered on the register no more than 10 years before it is made available."
+consequence = "Penalty charge notice (SI 2012/3118 Part 7). Must be renewed before the next letting or renewal."
+validity_years = 10
+warn_days = 180
+
+[mees_current]
+id = "MEES-E"
+name = "Minimum energy efficiency (band E)"
+law = "Energy Efficiency (Private Rented Property) (England and Wales) Regulations 2015 (SI 2015/962), reg 22 (minimum level = band E) and reg 23 (prohibition on letting sub-standard property)"
+rule = "A domestic private rented property rated F or G must not be let, or continue to be let (since 1 April 2020), unless a valid exemption is registered on the PRS Exemptions Register (reg 36)."
+consequence = "Civil penalty under reg 40; publication on the PRS Exemptions Register (reg 39)."
+minimum_band = "E"
+
+[mees_2030]
+id = "MEES-C-2030"
+name = "EPC C by 1 October 2030 (policy, not yet law)"
+law = "PROPOSED: Warm Homes Plan (21 Jan 2026), to be implemented by amending SI 2015/962. Not yet statutory."
+rule = "All privately rented homes to reach band C equivalent by 1 Oct 2030, with spend capped at the lower of the cost cap or 10% of property value. Uses current EER band as a labelled proxy; reformed EPC metrics (Home Energy Model) will replace it."
+consequence = "Forward-looking portfolio risk; no current penalty."
+target_band = "C"
+deadline = "2030-10-01"
+cost_cap = 10000
+cost_cap_pct_of_value = 0.10
+
+[gas_safety]
+id = "GAS"
+name = "Annual gas safety check"
+law = "Gas Safety (Installation and Use) Regulations 1998 (SI 1998/2451), reg 36(3)(a) (check at intervals of not more than 12 months) and reg 36(6)(a) (copy of record to existing tenant within 28 days)"
+rule = "Every gas appliance and flue must be safety-checked at least every 12 months, and a copy of the record given to each existing tenant within 28 days of the check."
+consequence = "Criminal offence enforced by the HSE. Since 1 May 2026 it no longer bars possession (the section 21 link ended with section 21 itself)."
+interval_months = 12
+copy_to_tenant_days = 28
+warn_days = 60
+
+[eicr]
+id = "EICR"
+name = "Electrical installation inspection (EICR)"
+law = "Electrical Safety Standards in the Private Rented Sector (England) Regulations 2020 (SI 2020/312), reg 3(2)(b) (intervals of no more than 5 years), reg 3(3)(b) (copy to existing tenant within 28 days), reg 3(4) (remedial work within 28 days)"
+rule = "The electrical installation must be inspected and tested by a qualified person at least every 5 years, and a copy of the report given to each existing tenant within 28 days."
+consequence = "Financial penalty up to £30,000 imposed by the local housing authority (reg 11)."
+interval_years = 5
+copy_to_tenant_days = 28
+warn_days = 90
+
+[deposit]
+id = "DEPOSIT"
+name = "Deposit protection and prescribed information"
+law = "Housing Act 2004, s213(3) (protect within 30 days of receipt) and s213(6) (prescribed information within 30 days); s214 (sanctions); s215 as amended by the Renters' Rights Act 2025 (possession bar)"
+rule = "A tenancy deposit must be protected in an authorised scheme and the prescribed information given to the tenant within 30 days of receipt."
+consequence = "Tenant can claim 1-3x the deposit (s214). The court cannot order possession until this is fixed or the deposit is returned (s215), except on Grounds 7A and 14 (anti-social behaviour)."
+protect_days = 30
+prescribed_info_days = 30
+blocks_possession = true
+
+[info_sheet]
+id = "INFO-SHEET"
+name = "Renters' Rights Act Information Sheet (existing tenancies)"
+law = "Renters' Rights Act 2025, Sch 6 para 7; Assured Tenancies (Private Rented Sector) (Written Statement of Terms etc and Information Sheet) (England) Regulations 2026 (SI 2026/324)"
+rule = "Landlords of assured and assured shorthold tenancies that existed before 1 May 2026 with written terms had to give tenants the government Information Sheet by 31 May 2026."
+consequence = "Fine of up to £7,000 per tenancy. Commentary also says it affects Section 8 notices on Grounds 1 and 1A (verify)."
+applies_to_tenancies_before = "2026-05-01"
+deadline = "2026-05-31"
